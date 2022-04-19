@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/panel.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Maze/Panel.gd" type="Script" id=2]
+[ext_resource path="res://Assets/aluminium_albedo.png" type="Texture" id=3]
+[ext_resource path="res://Assets/2.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/aluminium_normal.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Electro_Original.mp3" type="AudioStream" id=6]
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_texture = ExtResource( 3 )
+metallic = 0.7
+metallic_texture = ExtResource( 5 )
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.21317, 1, 0.119127 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, -0.00340334, 0.999994, 0, -0.999994, -0.00340334, 0, 0, 1.13214 )
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00525999, 1.04917, 0 )
+shape = SubResource( 1 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 0.917741, -0.00679311, 0.397122, -0.39718, -0.0156964, 0.917607, 0, -0.999854, -0.0171034, -0.0220756, 0.753061, 0.0665814 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 1.761
+light_indirect_energy = 16.0
+spot_range = 0.035532
+spot_angle = 42.9338
+
+[node name="SpotLight3" type="SpotLight" parent="."]
+transform = Transform( 0.917741, -0.00679311, 0.397122, -0.39718, -0.0156964, 0.917607, 0, -0.999854, -0.0171034, -0.0220756, 0.753061, 0.0665814 )
+visible = false
+light_color = Color( 0, 1, 0.0156863, 1 )
+light_energy = 1.761
+light_indirect_energy = 16.0
+spot_range = 0.035532
+spot_angle = 42.9338
+
+[node name="SpotLight2" type="SpotLight" parent="."]
+transform = Transform( 0.917741, -0.00679311, 0.397122, -0.39718, -0.0156964, 0.917607, 0, -0.999854, -0.0171034, -0.0220756, 0.753061, -0.0572792 )
+visible = false
+light_color = Color( 0, 1, 0.0392157, 1 )
+light_energy = 1.761
+light_indirect_energy = 16.0
+spot_range = 0.035532
+spot_angle = 42.9338
+
+[node name="SpotLight4" type="SpotLight" parent="."]
+transform = Transform( 0.917741, -0.00679311, 0.397122, -0.39718, -0.0156964, 0.917607, 0, -0.999854, -0.0171034, -0.0220756, 0.753061, -0.0572792 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 1.761
+light_indirect_energy = 16.0
+spot_range = 0.035532
+spot_angle = 42.9338
+
+[node name="SpotLight5" type="SpotLight" parent="."]
+transform = Transform( 0.917741, -0.00679311, 0.397122, -0.39718, -0.0156964, 0.917607, 0, -0.999854, -0.0171034, 0.105969, 0.702005, 0.0042562 )
+light_color = Color( 1, 0, 0, 1 )
+light_energy = 1.761
+light_indirect_energy = 16.0
+spot_range = 0.116142
+spot_angle = 51.8313
+
+[node name="SpotLight6" type="SpotLight" parent="."]
+transform = Transform( 0.917741, -0.00679311, 0.397122, -0.39718, -0.0156964, 0.917607, 0, -0.999854, -0.0171034, 0.105969, 0.702005, 0.0042562 )
+visible = false
+light_color = Color( 0, 1, 0.133333, 1 )
+light_energy = 1.761
+light_indirect_energy = 16.0
+spot_range = 0.116142
+spot_angle = 51.8313
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0718629, 0.771524, 0.00501111 )
+shadow_enabled = true
+omni_range = 1.58681
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.291167, 1.04917, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Interact" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Shocking" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

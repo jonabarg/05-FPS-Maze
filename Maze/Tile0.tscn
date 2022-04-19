@@ -1,7 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Maze/OmniLight.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/16.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/aluminium_albedo.png" type="Texture" id=3]
+[ext_resource path="res://Assets/aluminium_normal.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.482353, 0.482353, 0.482353, 1 )
+albedo_texture = ExtResource( 3 )
+metallic_texture = ExtResource( 4 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.5, 0.05, 1.5 )
@@ -14,7 +24,7 @@ extents = Vector3( 1.5, 0.05, 1.5 )
 
 [node name="Ground" type="MeshInstance" parent="StaticBody"]
 mesh = ExtResource( 2 )
-material/0 = null
+material/0 = SubResource( 9 )
 
 [node name="Ground_Collision" type="CollisionShape" parent="StaticBody"]
 shape = SubResource( 1 )

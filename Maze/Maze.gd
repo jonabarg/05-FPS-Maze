@@ -15,7 +15,7 @@ var cell_walls = {
 var map = []
 
 var tiles = [
-	preload("res://Maze/Tile0.tscn")	# all the tiles we created
+	preload("res://Maze/Tile0.tscn")
 	,preload("res://Maze/Tile1.tscn")
 	,preload("res://Maze/Tile2.tscn")
 	,preload("res://Maze/Tile3.tscn")
@@ -33,12 +33,11 @@ var tiles = [
 	,preload("res://Maze/Tile15.tscn")
 ]
 
-var tile_size = 3 						# 2-meter tiles
+var tile_size = 3 
 var width = 20  						# width of map (in tiles)
 var height = 12  						# height of map (in tiles)
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	randomize()
 	make_maze()
 	

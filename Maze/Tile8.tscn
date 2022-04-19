@@ -1,16 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/8.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Maze/OmniLight.tscn" type="PackedScene" id=2]
-
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 0.1, 2, 2 )
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.286275, 0.313726, 0.341176, 1 )
+[ext_resource path="res://Assets/aluminium_albedo.png" type="Texture" id=3]
+[ext_resource path="res://Assets/aluminium_normal.png" type="Texture" id=4]
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.05, 1, 1.5 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0.482353, 0.482353, 0.482353, 1 )
+albedo_texture = ExtResource( 3 )
+metallic_texture = ExtResource( 4 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1.5, 0.05, 1.5 )
@@ -21,19 +25,13 @@ extents = Vector3( 1.5, 0.05, 1.5 )
 
 [node name="OmniLight" parent="StaticBody" instance=ExtResource( 2 )]
 
-[node name="W" type="MeshInstance" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
-visible = false
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
 [node name="W_Collision" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47167, 1, 0 )
 shape = SubResource( 3 )
 
 [node name="Ground" type="MeshInstance" parent="StaticBody"]
 mesh = ExtResource( 1 )
-material/0 = null
+material/0 = SubResource( 9 )
 
 [node name="Ground_Collision" type="CollisionShape" parent="StaticBody"]
 shape = SubResource( 4 )
